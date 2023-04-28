@@ -13,6 +13,13 @@ export const getID = async(id:any)=>{
   return data;
 }
 
+export const getBreed = async(breed:any)=>{
+  const query = 'select * from catpost where breed = ?'
+  const values = [breed];
+  const data = await db.run_query(query,values);
+  return data;
+}
+
 export const add = async(post:any)=>{
   const keys = Object.keys(post);
   const values = Object.values(post);
