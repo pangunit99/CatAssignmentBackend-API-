@@ -29,7 +29,7 @@ export const add = async(post:any)=>{
     parm +='?,'
   }
   parm = parm.slice(0,-1);
-  const sql = `INSERT INTO articles (${key}) VALUES (${parm})`
+  const sql = `INSERT INTO catpost (${key}) VALUES (${parm})`
   try{
     await db.run_insert(sql,values);
     return {status:201};
@@ -38,7 +38,7 @@ export const add = async(post:any)=>{
   }
 }
 
-export const update = async(id:any,article:any)=>{
+/*export const update = async(id:any,article:any)=>{
   const aid = Object.values(id);
   const keys = Object.keys(article);
   const values = Object.values(article);
@@ -54,18 +54,16 @@ export const update = async(id:any,article:any)=>{
   }catch(err:any){
     return err;
   }
-}
+}*/
 
-export const updatewithsir = async(id:number,article:any)=>{
-  const keys = Object.keys(article);
-  const values = Object.values(article);
-  //let key = keys.join(',');
-  //let parm = '';
+export const update = async(id:any,post:any)=>{
+  const keys = Object.keys(post);
+  const values = Object.values(post);
   let update =''
   for(let i = 0 ; i<values.length ;i++){
     update +=`${keys[i]}=?,`
   }
-  //parm = parm.slice(0,-1);
+  
   update = update.slice(0,-1);
   const sql = `UPDATE articles (${update}) WHERE id=${id}`
   try{

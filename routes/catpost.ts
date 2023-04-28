@@ -15,6 +15,7 @@ const getAll = async(ctx:RouterContext,next:any)=>{
   }
   await next();
 }
+
 //use id get catpost
 const getId = async(ctx:RouterContext, next:any)=>{
   const id = ctx.params.id;
@@ -24,6 +25,7 @@ const getId = async(ctx:RouterContext, next:any)=>{
   }else{
     ctx.status = 404;
   }
+  await next();
 }
 
 //use type to get catpost
@@ -35,11 +37,43 @@ const getByBreed = async(ctx:RouterContext, next:any)=>{
   }else{
     ctx.status = 404;
   }
+  await next();
 }
 
+//add catpost
+const createpost = async (ctx:RouterContext,next:any)=>{
+  const body = ctx.request.body;
+  const result = await model.add(body);
+  if(result.status ==201){
+    ctx.status = 201;
+    ctx.body = body;
+  }else{
+    ctx.status = 500;
+    ctx.body = {err:"create new post failed!"}
+  }
+  await next();
+}
+
+
+//update catpost
+const updatecat = async(ctx:RouterContext,next:any)=>{
+  const id = ctx.params.id;
+  const body = ctx.request.body;
+  const result = await model.update(id,body);
+  if(result.status==201){
+    ctx.status = 201;
+    ctx.body = body;
+  }else{
+    ctx.status = 200;
+    ctx.body = {err:"updata catpost failed!"}
+  }
+  await next();
+}
 
 //use api
 router.get('/',getAll);
 router.get('/:id([0-9]{1,})',getId);
 router.get('/:breed',getByBreed);
+router.post('/',bodyParser(),createpost);
+router.put('/:id([0-9]+)',bodyParser(),updatecat);
 export{router};
