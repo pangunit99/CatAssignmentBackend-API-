@@ -19,5 +19,5 @@ app.use(passport.initialize())
 //app.use(router.routes());
 app.use(catpost.routes())
 
-app.use(user.routes())
+//app.use(user.routes())
 app.listen(10888);

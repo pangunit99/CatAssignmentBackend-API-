@@ -49,15 +49,11 @@ describe("POST / - a simple api endpoint" , () => {
 
 describe("PUT / - update catpost" , () => {
   test('PUT and article', async () =>{
-    const result = await request(app.callback()).post('/api/v1/catpost')
-      .send({'title':'cat ammy',
+    const result = await request(app.callback()).put('/api/v1/catpost/5')
+      .send({'title':'cat change',
               'breed':'Aegean',
-             'alltext':'chang the test now',
-             'staffid':'2'
+             'alltext':'test change'
             });
-    expect(function(res){
-      res.body.id=5;
-    });
        expect(result.statusCode).toEqual(201);
   });
 });

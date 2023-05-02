@@ -38,41 +38,40 @@ export const add = async(post:any)=>{
   }
 }
 
-/*export const update = async(id:any,article:any)=>{
+export const update = async(id:any,catpost:any)=>{
   const aid = Object.values(id);
-  const keys = Object.keys(article);
-  const values = Object.values(article);
+  const keys = Object.keys(catpost);
+  const values = Object.values(catpost);
   let parm = '';
   for(let i = 0 ; i<values.length ;i++){
     parm += `${keys[i]} = '${values[i]}',`
   }
   parm = parm.slice(0,-1);
-  const sql = `UPDATE articles SET ${parm} WHERE id = ?`
+  const sql = `UPDATE catpost SET ${parm} WHERE id = ?`
   try{
     await db.run_update(sql,aid);
     return {status:201};
   }catch(err:any){
     return err;
   }
-}*/
+}
 
-export const update = async(id:any,post:any)=>{
+/*export const update = async(id:any,post:any)=>{
   const keys = Object.keys(post);
   const values = Object.values(post);
   let update =''
   for(let i = 0 ; i<values.length ;i++){
     update +=`${keys[i]}=?,`
   }
-  
   update = update.slice(0,-1);
-  const sql = `UPDATE articles (${update}) WHERE id=${id}`
+  const sql = `UPDATE catpost (${update}) WHERE id=${id}`
   try{
     await db.run_insert(sql,values);
     return {status:201};
   }catch(err:any){
     return err;
   }
-}
+}*/
 
 export const del = async(id:any,post:any)=>{
   const aid = Object.values(id);
