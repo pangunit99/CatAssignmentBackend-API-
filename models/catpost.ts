@@ -73,10 +73,10 @@ export const update = async(id:any,catpost:any)=>{
   }
 }*/
 
-export const del = async(id:any,post:any)=>{
+export const del = async(id:any)=>{
   const aid = Object.values(id);
 
-  const sql = `DELETE from articles where id=?`
+  const sql = `DELETE from catpost where id=?`
   try{
     await db.run_query(sql,aid);
     return {status:201};

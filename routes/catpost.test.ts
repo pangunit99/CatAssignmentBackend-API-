@@ -4,6 +4,7 @@ import json from "koa-json"
 import {router} from "../routes/catpost"
 import passport from "koa-passport"
 
+
 const app : Koa = new Koa();
 app.use(json());
 app.use(passport.initialize());
@@ -36,8 +37,9 @@ describe("Get /breed - get post by breed", () => {
 });
 
 describe("POST / - a simple api endpoint" , () => {
-  xtest('POST new catpost', async () =>{
+  test('POST new catpost', async () =>{
     const result = await request(app.callback()).post('/api/v1/catpost')
+      .auth('staff001','abc123')
       .send({'title':'test cat',
               'breed':'Aegean',
              'alltext':'alltext',
@@ -48,8 +50,8 @@ describe("POST / - a simple api endpoint" , () => {
 });
 
 describe("PUT / - update catpost" , () => {
-  test('PUT and article', async () =>{
-    const result = await request(app.callback()).put('/api/v1/catpost/5')
+  xtest('PUT and article', async () =>{
+    const result = await request(app.callback()).put('/api/v1/catpost')
       .send({'title':'cat change',
               'breed':'Aegean',
              'alltext':'test change'

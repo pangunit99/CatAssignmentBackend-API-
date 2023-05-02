@@ -1,7 +1,8 @@
 import Router , {RouterContext} from "koa-router"
 import bodyParser from "koa-bodyparser"
+import {basicAuth} from '../controllers/auth'
 import * as model from "../models/catpost"
-
+import {validateArticle} from '../controllers/validation';
 const router = new Router({prefix:'/api/v1/catpost'});
 
 //get all post about cat
@@ -70,10 +71,27 @@ const updatecat = async(ctx:RouterContext,next:any)=>{
   await next();
 }
 
+//update catpost
+const deletecat = async(ctx:RouterContext,next:any)=>{
+  const id = ctx.params.id;
+  //const body = ctx.request.body;
+  const result = await model.del(id);
+  if(result.status==201){
+    ctx.status = 201;
+    //ctx.body = body;
+    ctx.body = 'delete successful';
+  }else{
+    ctx.status = 200;
+    ctx.body = {err:"delete catpost failed!"}
+  }
+  await next();
+}
+
 //use api
 router.get('/',getAll);
 router.get('/:id([0-9]{1,})',getId);
 router.get('/:breed',getByBreed);
-router.post('/',bodyParser(),createpost);
-router.put('/:id([0-9]+)',bodyParser(),updatecat);
+router.post('/',validateArticle,basicAuth,bodyParser(),createpost);
+router.put('/:id([0-9]+)',validateArticle,basicAuth,bodyParser(),updatecat);
+router.del('/:id([0-9]+)',validateArticle,basicAuth,bodyParser(),deletecat);
 export{router};
