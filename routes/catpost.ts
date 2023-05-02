@@ -3,8 +3,8 @@ import bodyParser from "koa-bodyparser"
 import {basicAuth} from '../controllers/auth'
 import * as model from "../models/catpost"
 import {validateArticle} from '../controllers/validation';
-const router = new Router({prefix:'/api/v1/catpost'});
 
+const router = new Router({prefix:'/api/v1/catpost'});
 //get all post about cat
 const getAll = async(ctx:RouterContext,next:any)=>{
   //ctx.body = articles;
@@ -87,9 +87,8 @@ const deletecat = async(ctx:RouterContext,next:any)=>{
   await next();
 }
 
-const staffregister = async(ctx:RouterContext,next:any)=>{
-  
-}
+
+
 
 //use api
 router.get('/',getAll);
@@ -98,5 +97,6 @@ router.get('/:breed',getByBreed);
 router.post('/',validateArticle,basicAuth,bodyParser(),createpost);
 router.put('/:id([0-9]+)',validateArticle,basicAuth,bodyParser(),updatecat);
 router.del('/:id([0-9]+)',basicAuth,bodyParser(),deletecat);
-router.post('/register',bodyParser(),staffregister)
+
+
 export{router};

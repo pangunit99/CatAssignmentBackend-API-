@@ -56,22 +56,6 @@ export const update = async(id:any,catpost:any)=>{
   }
 }
 
-/*export const update = async(id:any,post:any)=>{
-  const keys = Object.keys(post);
-  const values = Object.values(post);
-  let update =''
-  for(let i = 0 ; i<values.length ;i++){
-    update +=`${keys[i]}=?,`
-  }
-  update = update.slice(0,-1);
-  const sql = `UPDATE catpost (${update}) WHERE id=${id}`
-  try{
-    await db.run_insert(sql,values);
-    return {status:201};
-  }catch(err:any){
-    return err;
-  }
-}*/
 
 export const del = async(id:any)=>{
   const aid = Object.values(id);
@@ -84,3 +68,22 @@ export const del = async(id:any)=>{
     return err;
   }
 }
+
+
+/*export const adduser = async(userreg:any)=>{
+  const keys = Object.keys(userreg);
+  const values = Object.values(userreg);
+  const key = keys.join(',');
+  let parm = '';
+  for(let i = 0 ; i<values.length ;i++){
+    parm +='?,'
+  }
+  parm = parm.slice(0,-1);
+  const sql = `INSERT INTO users (${key}) VALUES (${parm})`
+  try{
+    await db.run_insert(sql,values);
+    return {status:201};
+  }catch(err:any){
+    return err;
+  }
+}*/

@@ -3,6 +3,7 @@ import Router, {RouterContext} from "koa-router"
 import logger from "koa-logger"
 import json from "koa-json"
 import {router as catpost} from "./routes/catpost"
+import {router as user} from "./routes/user"
 import serve from 'koa-static-folder';
 import cors from '@koa/cors'
 
@@ -18,6 +19,7 @@ app.use(json());
 app.use(passport.initialize())
 //app.use(router.routes());
 app.use(catpost.routes())
+app.use(user.routes())
 
 //app.use(user.routes())
 app.listen(10888);
