@@ -1,6 +1,6 @@
 import { Validator, ValidationError } from "jsonschema";
 import { RouterContext } from "koa-router";
-import { catpost } from "../schemas/catpost.schema.ts";
+import { catposts } from "../schemas/catposts.schema";
 
 const v = new Validator();
 export const validateArticle = async (ctx: RouterContext, next: any) => {
@@ -10,7 +10,7 @@ export const validateArticle = async (ctx: RouterContext, next: any) => {
   };
   const body = ctx.request.body;
   try {
-    v.validate(body, catpost, validationOptions);
+    v.validate(body, catposts, validationOptions);
     await next();
   } catch (error) {
     if (error instanceof ValidationError) {

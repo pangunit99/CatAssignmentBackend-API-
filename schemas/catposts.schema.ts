@@ -1,4 +1,4 @@
-export const article = {
+export const catposts = {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "id": "/catpost",
   "title": "catpost",
