@@ -39,13 +39,18 @@ passport.use(new BasicStrategy(async (username,password,done)=>{
 export const basicAuth = async (ctx:RouterContext,next:any)=>{
   await passport.authenticate("basic", {session:false})(ctx,next);
   if(ctx.status == 401){
+    ctx.status=401;
     ctx.body = {
       message:'you are not authorized'
     };
   }else{
+    ctx.status=201;
+    ctx.body = {
+      message:'you are passed'
+    };
     /*ctx.body = {
       message:'you are passed'
     };*/
-    await next;
+    await next
   }
 }

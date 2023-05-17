@@ -1,8 +1,9 @@
 import Router , {RouterContext} from "koa-router"
 import bodyParser from "koa-bodyparser"
 import * as model from "../models/user"
-
+import {basicAuth} from '../controllers/auth'
 const router = new Router({prefix:'/api/v1/user'});
+
 
 //create new staff
 const staffregister = async(ctx:RouterContext,next:any)=>{
@@ -25,12 +26,25 @@ const adduser = async(ctx:RouterContext,next:any)=>{
   const result = await model.adduser(userreg);
   if(result.status == 201){
     ctx.status = 201;
-    ctx.body = userreg;
+    ctx.body = result;
   }else{
     ctx.status = 500;
     ctx.body = {err:'failed register'}
   }
   await next();
+}
+
+const login=async(ctx:RouterContext,next:any)=>{
+  const slogin = ctx.request.body;
+  const result = await model.login(slogin);
+  if(result.status == 201){
+    ctx.status = 201;
+    ctx.body = result;
+  }else{
+    ctx.status = 500;
+    ctx.body = {err:'failed login'}
+  }
+  await next;
 }
 
 
@@ -44,7 +58,8 @@ const adduser = async(ctx:RouterContext,next:any)=>{
 
 
 
+
 router.post('/staff',bodyParser(),staffregister);
 router.post('/user',bodyParser(),adduser);
-
+router.get('/login',basicAuth,bodyParser())
 export{router};

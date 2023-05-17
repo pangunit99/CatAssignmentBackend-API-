@@ -93,7 +93,7 @@ const deletecat = async(ctx:RouterContext,next:any)=>{
 //use api
 router.get('/',getAll);
 router.get('/:id([0-9]{1,})',getId);
-router.get('/:breed',getByBreed);
+router.get('/b:breed',getByBreed);
 router.post('/',validateArticle,basicAuth,bodyParser(),createpost);
 router.put('/:id([0-9]+)',validateArticle,basicAuth,bodyParser(),updatecat);
 router.del('/:id([0-9]+)',basicAuth,bodyParser(),deletecat);
