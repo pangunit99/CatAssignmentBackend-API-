@@ -5,6 +5,11 @@ export const findByUsername = async (login:string) =>{
   return user
 }
 
+export const findUser = async (username:string) =>{
+  const query = 'SELECT * FROM user where username = ?'
+  const user= await db.run_query(query,[username]);
+  return user
+}
 
 export const addstaff = async(staff:any)=>{
   const keys = Object.keys(staff);
@@ -40,4 +45,11 @@ export const adduser = async(userreg:any)=>{
   }catch(err:any){
     return err;
   }
+}
+
+export const ulogin = async(user:any)=>{
+  const query = 'SELECT * FROM user where username = ?'
+  const values = [user];
+  const data = await db.run_query(query,values);
+  return data;
 }

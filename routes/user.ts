@@ -3,6 +3,7 @@ import bodyParser from "koa-bodyparser"
 import * as model from "../models/user"
 import {basicAuth} from '../controllers/auth'
 const router = new Router({prefix:'/api/v1/user'});
+import {userAuth} from '../controllers/userauth'
 
 
 //create new staff
@@ -34,9 +35,9 @@ const adduser = async(ctx:RouterContext,next:any)=>{
   await next();
 }
 
-const login=async(ctx:RouterContext,next:any)=>{
+const ulogin=async(ctx:RouterContext,next:any)=>{
   const slogin = ctx.request.body;
-  const result = await model.login(slogin);
+  const result = await model.ulogin(slogin);
   if(result.status == 201){
     ctx.status = 201;
     ctx.body = result;
@@ -62,4 +63,5 @@ const login=async(ctx:RouterContext,next:any)=>{
 router.post('/staff',bodyParser(),staffregister);
 router.post('/user',bodyParser(),adduser);
 router.get('/login',basicAuth,bodyParser())
+router.get('/ulogin',userAuth,bodyParser())
 export{router};
