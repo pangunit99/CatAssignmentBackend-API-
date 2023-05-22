@@ -2,6 +2,7 @@ import passport from "koa-passport";
 import { BasicStrategy } from "passport-http";
 import {RouterContext} from "koa-router";
 import * as users from '../models/user'
+import * as staffs from '../models/staff'
 
 const verifyPassword = (user:any,password:string)=>{
   return user.password === password;
@@ -11,8 +12,12 @@ passport.use(new BasicStrategy(async (username,password,done)=>{
   let result :any [] = [];
   try {
     result = await users.findUser(username)
+    console.log(result.length)
+    if(result.length==0){
+      result = await staffs.findByUsername(username)
+    }
   }catch(error){
-    console.error(`Error during authentication for user ${username}: ${error}`);
+    console.error(` Error during authentication for user ${username}: ${error}`);
     done(null,false);
   }
   if(result.length){
@@ -24,7 +29,7 @@ passport.use(new BasicStrategy(async (username,password,done)=>{
       done(null,false)
     }
   }else{
-    console.log(`No user found with username ${username}`);
+    console.log(`call No user found with username ${username}`);
     done(null, false);
   }
 }))

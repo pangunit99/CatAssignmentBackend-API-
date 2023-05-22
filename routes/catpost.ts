@@ -1,6 +1,6 @@
 import Router , {RouterContext} from "koa-router"
 import bodyParser from "koa-bodyparser"
-import {basicAuth} from '../controllers/auth'
+import {userAuth} from '../controllers/userauth'
 import * as model from "../models/catpost"
 import {validateArticle} from '../controllers/validation';
 
@@ -93,10 +93,10 @@ const deletecat = async(ctx:RouterContext,next:any)=>{
 //use api
 router.get('/',getAll);
 router.get('/:id([0-9]{1,})',getId);
-router.get('/b:breed',getByBreed);
-router.post('/',validateArticle,basicAuth,bodyParser(),createpost);
-router.put('/:id([0-9]+)',validateArticle,basicAuth,bodyParser(),updatecat);
-router.del('/:id([0-9]+)',basicAuth,bodyParser(),deletecat);
+router.get('/b:breed([^a-z][A-z]+)',getByBreed);
+router.post('/',validateArticle,userAuth,bodyParser(),createpost);
+router.put('/:id([0-9]+)',validateArticle,userAuth,bodyParser(),updatecat);
+router.del('/:id([0-9]+)',userAuth,bodyParser(),deletecat);
 
 
 export{router};

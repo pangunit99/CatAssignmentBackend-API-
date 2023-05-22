@@ -3,8 +3,8 @@ import Router, {RouterContext} from "koa-router"
 import logger from "koa-logger"
 import json from "koa-json"
 import {router as catpost} from "./routes/catpost"
-import {router as user} from "./routes/user"
-import {router as basicauth} from "./routes/user"
+import {router as userauth} from "./routes/user"
+import {router as basicauth} from "./routes/staff"
 import serve from 'koa-static-folder';
 import cors from '@koa/cors'
 
@@ -18,9 +18,8 @@ app.use(serve('./docs'))
 app.use(logger());
 app.use(json());
 app.use(passport.initialize())
-//app.use(router.routes());
 app.use(catpost.routes())
-app.use(user.routes())
 app.use(basicauth.routes())
+app.use(userauth.routes())
 
 app.listen(10888);

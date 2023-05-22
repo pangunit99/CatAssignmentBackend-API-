@@ -10,6 +10,7 @@ export const getID = async(id:any)=>{
   const query = 'select * from catpost where ID = ?';
   const values = [id];
   const data = await db.run_query(query,values);
+  console.log(data);
   return data;
 }
 
@@ -69,21 +70,3 @@ export const del = async(id:any)=>{
   }
 }
 
-
-/*export const adduser = async(userreg:any)=>{
-  const keys = Object.keys(userreg);
-  const values = Object.values(userreg);
-  const key = keys.join(',');
-  let parm = '';
-  for(let i = 0 ; i<values.length ;i++){
-    parm +='?,'
-  }
-  parm = parm.slice(0,-1);
-  const sql = `INSERT INTO users (${key}) VALUES (${parm})`
-  try{
-    await db.run_insert(sql,values);
-    return {status:201};
-  }catch(err:any){
-    return err;
-  }
-}*/
