@@ -27,5 +27,23 @@ export const adduser = async(userreg:any)=>{
 export const userp = async (username:string) =>{
   const query = 'SELECT * FROM users where username = ?'
   const user= await db.run_query(query,[username]);
-  return user
+  return user;
+}
+
+export const addfav = async(catpostid:any,userid:any)=>{
+  const cat = [catpostid];
+  const usid = Object.values(userid);
+  const query = `INSERT INTO savelove (catpostid,userid) VALUES (${cat},${usid})`
+  try{
+    await db.run_insert(query,null);
+    return {status:201};
+  }catch(err:any){
+    return err;
+  }
+}
+
+
+export const getfavourite= async(userid:any)=>{
+  const uid = [userid];
+  const query = `SELECT * FROM savelove where catpostid = `
 }

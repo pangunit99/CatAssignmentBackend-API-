@@ -24,4 +24,9 @@ export const addstaff = async(staff:any)=>{
   }
 }
 
+export const staffprofile = async (login:string) =>{
+  const query = 'SELECT * FROM staff where login = ?'
+  const staff= await db.run_query(query,[login]);
+  return staff;
+}
 

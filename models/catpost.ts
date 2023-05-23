@@ -17,6 +17,7 @@ export const getID = async(id:any)=>{
 export const getBreed = async(breed:any)=>{
   const query = 'select * from catpost where breed = ?'
   const values = [breed];
+  console.log(query,values)
   const data = await db.run_query(query,values);
   return data;
 }

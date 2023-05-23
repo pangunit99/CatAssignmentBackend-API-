@@ -32,11 +32,14 @@ const getId = async(ctx:RouterContext, next:any)=>{
 //use type to get catpost
 const getByBreed = async(ctx:RouterContext, next:any)=>{
   const breed = ctx.params.breed;
+  console.log(breed);
   const catpost = await model.getBreed(breed);
+  console.log(catpost);
   if(catpost.length){
     ctx.body = catpost;
   }else{
     ctx.status = 404;
+    console.log(catpost.length);
   }
   await next();
 }
@@ -93,7 +96,7 @@ const deletecat = async(ctx:RouterContext,next:any)=>{
 //use api
 router.get('/',getAll);
 router.get('/:id([0-9]{1,})',getId);
-router.get('/b:breed([^a-z][A-z]+)',getByBreed);
+router.get('/b:breed([A-z]+)',getByBreed);
 router.post('/',validateArticle,userAuth,bodyParser(),createpost);
 router.put('/:id([0-9]+)',validateArticle,userAuth,bodyParser(),updatecat);
 router.del('/:id([0-9]+)',userAuth,bodyParser(),deletecat);

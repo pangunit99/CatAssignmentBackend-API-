@@ -20,8 +20,22 @@ const staffregister = async(ctx:RouterContext,next:any)=>{
   await next();
 }
 
+const sprofile=async(ctx:RouterContext,next:any)=>{
+  const username = ctx.params.id;
+  console.log(username);
+  const result = await model.staffprofile(username);
+  if(result.length){
+    ctx.body = result[0]
+  }else{
+    ctx.status = 401;
+    ctx.body = {err:'load failed'}
+  }
+  await next();
+}
+
 
 router.post('/staff',bodyParser(),staffregister);
 router.post('/login',userAuth,bodyParser());
+router.get('/:id([A-z0-9]+)',bodyParser(),sprofile)
 
 export{router};
