@@ -53,10 +53,10 @@ const addfavourite = async(ctx:RouterContext,next:any)=>{
 }
 
 const myfav = async(ctx:RouterContext,next:any)=>{
-  const uid = ctx.params.id;
+  const uid = ctx.params.user;
   const myfavourite = await model.getfavourite(uid);
   if(myfavourite.length){
-    ctx.body = catpost;
+    ctx.body = myfavourite;
   }else{
     ctx.status = 404;
     ctx.body = {message:'you have not favourite cat'}
@@ -68,6 +68,6 @@ const myfav = async(ctx:RouterContext,next:any)=>{
 router.post('/user',bodyParser(),adduser);
 router.post('/ulogin',userAuth,bodyParser());
 router.get('/:id([A-z0-9]+)',bodyParser(),profile)
-router.post('/:id',bodyParser(),addfavourite)
-router.get('/u:id([0-9]+)',bodyParser(),myfav)
+router.post('/:id([0-9]+)',bodyParser(),addfavourite)
+router.get('/b:user([0-9]+)',bodyParser(),myfav)
 export{router};

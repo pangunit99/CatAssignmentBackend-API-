@@ -45,5 +45,12 @@ export const addfav = async(catpostid:any,userid:any)=>{
 
 export const getfavourite= async(userid:any)=>{
   const uid = [userid];
-  const query = `SELECT * FROM savelove where catpostid = `
+  const query = `select c.id,s.userid,title,breed,alltext,summary,datecreated,datemodified,imageurl from catpost c left join savelove s ON c.id=s.catpostid WHERE userid=?`
+
+  try{
+    const runsql = await db.run_query(query,uid);
+    return runsql;
+  }catch(err:any){
+    return err.response;
+  }
 }
