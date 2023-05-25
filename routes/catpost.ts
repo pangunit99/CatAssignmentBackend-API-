@@ -23,6 +23,7 @@ const getId = async(ctx:RouterContext, next:any)=>{
   const catpost = await model.getID(id);
   if(catpost.length){
     ctx.body = catpost[0]
+    ctx.status = 200;
   }else{
     ctx.status = 404;
   }

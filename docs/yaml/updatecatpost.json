@@ -1,0 +1,26 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"definition": {
+		"update": {
+			"id": "/update",
+			"title": "updatecatpost",
+			"description": "update catpost",
+			"type": "object",
+			"properties": {
+				"allText": {
+					"description": "Body text of the blog catpost",
+					"type": "string"
+				},
+				"summary": {
+					"description": "Optional short text summary of catpost",
+					"type": "string"
+				},
+				"imageURL": {
+					"description": "URL for main image to show in catpost",
+					"type": "uri"
+				},
+			},
+			"required": ["allText"]
+		}
+	}
+}

@@ -1,0 +1,47 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"definition": {
+		"catpost": {
+			"id": "/catpost",
+			"title": "Catpost",
+			"description": "An catpost in the blog",
+			"type": "object",
+			"properties": {
+        "id": {
+          "description": "catpost id , auto genter",
+					"type": "serial4"
+        },
+				"title": {
+					"description": "Main title of the blog catpost",
+					"type": "string"
+				},
+        "breed":{
+          "description": "cat breed",
+					"type": "string"
+        },
+				"allText": {
+					"description": "Body text of the blog catpost",
+					"type": "string"
+				},
+				"summary": {
+					"description": "Optional short text summary of catpost",
+					"type": "string"
+				},
+				"imageURL": {
+					"description": "URL for main image to show in catpost",
+					"type": "uri"
+				},
+				"state": {
+					"description": "cat status",
+					"type": "string(here/not)"
+				},
+				"staffid": {
+					"description": "staff ID of the article creater",
+					"type": "integer",
+					"minimum": 0
+				},
+			},
+			"required": ["title", "allText", "authorID","staffid"]
+		}
+	}
+}

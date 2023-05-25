@@ -34,5 +34,5 @@ export const catposts = {
       "type": "integer",
       "minimum": 0
     },
-  }, "required": ["title", "allText","breed"]
+  }, "required": ["title", "allText","breed","staffid"]
 }

@@ -1,0 +1,253 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Back End Demonstration API
+  description: A simple blog API
+  contact:
+    name: Pang
+    email: railpang1999@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/license/LICENSE-2.0.html'
+server: 
+- url: 'http://www.pang.com'
+  description: Develop server
+
+
+tags: 
+  - name: Users
+    description: API endpoints for user management
+  - name: Catpost
+    description: Accesss and perform CRUD operations on blog entries.
+
+paths:
+  /api/v1/catpost/:
+    get:
+      tags:
+        - Catpost
+      description:
+        Get all Catpost
+        
+    post:
+      tags:
+        - Catpost
+      description:
+        Add a new Catpost
+      responses:
+        '200':
+          description: View all catpost
+        '404':
+          description: view fail
+      requestBody:
+        description: All new catpost data
+        required: true
+        content: 
+          applocation/json:
+            schema:
+              $ref: ./catpost.json#/definition/catpost
+              
+  /api/v1/catpost/b{breed}:
+    parameters:
+      - in: path
+        name: breed
+        schema:
+          type: string
+        required: true
+        description: cats breed
+    get:
+      tags:
+        - Catpost
+      description:
+        Get catpost by cat breed
+      responses:
+        '200':
+          description: View of select breed catpost
+        '404':
+          description: Catpost was not found
+
+      
+  /api/v1/catpost/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: Numberic id of the Catpost
+    get:
+      tags:
+        - Catpost
+      description:
+        Get catpost by ID
+      responses:
+        '200':
+          description: View of catpost detail record
+        '404':
+          description: Catpost was not found
+    put:
+      tags:
+        - Catpost
+      description: 
+        Update catpost by ID
+      responses:
+        '200':
+          description: update catpost successful
+        '404':
+          description: view fail
+      requestBody:
+        description: input update catpost all information
+        required: true
+        content: 
+          applocation/json:
+            schema:
+              $ref: ./updatecatpost.json#/definition/update
+
+    delete:
+      tags:
+        - Catpost
+      description:
+        delete catpost by ID
+      responses:
+        '200':
+          description: Delete successful
+        '404':
+          description: Delete fail
+
+
+
+  /api/v1/user/{username}:
+    parameters:
+        - in: path
+          name: id
+          schema:
+            type: String
+          required: true
+          description: username
+    get: 
+      tags:
+        - User
+      description:
+       see the user profile by your self
+      responses:
+        '201':
+          description: show user detail
+
+  /api/v1/user/ulogin:
+    post:
+      parameters:
+          - in: header
+            name: auth
+            schema:
+              type: string
+            required: true
+            description: "headers : {Authorization : Basic ${(username:password).toString('base64')}}"
+
+      tags:
+        - User
+      description:
+        login used basicauth
+      responses:
+        '201':
+          description: login successful
+
+  
+  /api/v1/user/{id}:
+    parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: catpost id
+    post:
+      tags:
+        - User
+      description:
+        add favourite catpost to user used catpost id
+      responses:
+        '201':
+          description: add successful
+        '404':
+          description: fail
+      requestBody:
+        description: user id
+        required: true
+        content: 
+          applocation/json:
+            schema:
+              $ref: ./userid.json#/definition/userid
+
+  /api/v1/user/user:
+    post:
+      tags:
+        - User
+      description:
+        register user account
+      responses:
+        '201':
+          description: successful
+        '404':
+          description: register fail
+      requestBody:
+        description: input information
+        required: true
+        content: 
+          applocation/json:
+            schema:
+              $ref: ./useraccount.json#/definition/useraccount
+
+
+  /api/v1/staff/{username}:
+    parameters:
+        - in: path
+          name: id
+          schema:
+            type: String
+          required: true
+          description: staff login name
+    get: 
+      tags:
+        - Staff
+      description:
+       see the staff profile by your self
+      responses:
+        '201':
+          description: show staff detail
+
+  /api/v1/staff/login:
+    post:
+      parameters:
+          - in: header
+            name: auth
+            schema:
+              type: string
+            required: true
+            description: "headers : {Authorization : Basic ${(username:password).toString('base64')}}"
+
+      tags:
+        - Staff
+      description:
+        login used basicauth
+      responses:
+        '201':
+          description: login successful
+
+
+  /api/v1/staff/staff:
+    post:
+      tags:
+        - Staff
+      description:
+        register staff account
+      responses:
+        '201':
+          description: successful
+        '404':
+          description: register fail
+      requestBody:
+        description: input information
+        required: true
+        content: 
+          applocation/json:
+            schema:
+              $ref: ./useraccount.json#/definition/useraccount
