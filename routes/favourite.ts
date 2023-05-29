@@ -9,6 +9,7 @@ const myfav = async(ctx:RouterContext,next:any)=>{
   const uid = ctx.params.user;
   const myfavourite = await model.getfavourite(uid);
   if(myfavourite.length){
+    ctx.status = 200;
     ctx.body = myfavourite;
   }else{
     ctx.status = 404;

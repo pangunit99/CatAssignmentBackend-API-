@@ -25,7 +25,8 @@ const sprofile=async(ctx:RouterContext,next:any)=>{
   console.log(username);
   const result = await model.staffprofile(username);
   if(result.length){
-    ctx.body = result[0]
+    ctx.body = result
+    ctx.status = 201;
   }else{
     ctx.status = 401;
     ctx.body = {err:'load failed'}

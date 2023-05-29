@@ -1,0 +1,22 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"definition": {
+		"sendmessage": {
+			"id": "/sendmessage",
+			"title": "send message",
+			"description": "send message",
+			"type": "object",
+			"properties": {
+				"username": {
+					"description": "user username",
+					"type": "string"
+				},
+				"question": {
+					"description": "need to send message",
+					"type": "string"
+				}
+			},
+			"required": ["username","question"]
+		}
+	}
+}

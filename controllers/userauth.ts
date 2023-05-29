@@ -11,7 +11,9 @@ const verifyPassword = (user:any,password:string)=>{
 passport.use(new BasicStrategy(async (username,password,done)=>{
   let result :any [] = [];
   try {
-    result = await users.findUser(username)
+    if(result.length==0){
+      result = await users.findUser(username)
+    }
     console.log(result.length)
     if(result.length==0){
       result = await staffs.findByUsername(username)

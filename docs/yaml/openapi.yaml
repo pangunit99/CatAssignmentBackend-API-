@@ -251,3 +251,102 @@ paths:
           applocation/json:
             schema:
               $ref: ./useraccount.json#/definition/useraccount
+
+  /api/v1/message/:
+    parameters:
+          - in: header
+            name: auth
+            schema:
+              type: string
+            required: true
+            description: "headers : {Authorization : Basic ${(username:password).toString('base64')}}"
+    post:
+      tags:
+        - message
+      description:
+        user send message to company
+      responses:
+        '201':
+          description: message sended!
+        '500':
+          description: error
+      requestBody:
+        description: input information
+        required: true
+        content: 
+          applocation/json:
+            schema:
+              $ref: ./sendmessage.json#/definition/sendmessage
+    get:
+      tags:
+        - message
+      description:
+        get all user send message
+      responses:
+        '200':
+          description: get all message
+
+          
+  /api/v1/message/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: message id
+    get:
+      tags:
+        - message
+      description:
+        get message by id
+      responses:
+        '200':
+          description: view message with message id successful
+        '404':
+          description: no this id
+
+  /api/v1/message/{username}:
+    parameters:
+      - in: path
+        name: username
+        schema:
+          type: string
+        required: true
+        description: username
+    get:
+      tags:
+        - message
+      description:
+        get all message by user
+      responses:
+        '200':
+          description: show user send all message
+        '404':
+          description: fail
+
+  /api/v1/message/{mid}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: interger
+        required: true
+        description: message id
+    put:
+      tags:
+        - message
+      description:
+        reply message 
+      responses:
+        '200':
+          description: reply successful
+        '500':
+          description: reply fail
+      requestBody:
+        description: input information
+        required: true
+        content: 
+          applocation/json:
+            schema:
+              $ref: ./staffreply.json#/definition/staffreply

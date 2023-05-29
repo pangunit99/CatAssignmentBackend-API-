@@ -6,6 +6,7 @@ import {router as catpost} from "./routes/catpost"
 import {router as userauth} from "./routes/user"
 import {router as basicauth} from "./routes/staff"
 import {router as favour} from "./routes/favourite"
+import {router as msge} from "./routes/message"
 import serve from 'koa-static-folder';
 import cors from '@koa/cors'
 
@@ -23,5 +24,6 @@ app.use(catpost.routes());
 app.use(basicauth.routes());
 app.use(userauth.routes());
 app.use(favour.routes());
+app.use(msge.routes());
 
 app.listen(10888);

@@ -1,0 +1,18 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"definition": {
+		"staffreply": {
+			"id": "/staffreply",
+			"title": "staffreply",
+			"description": "staffreply message",
+			"type": "object",
+			"properties": {
+        "answer": {
+          "description": "reply message",
+					"type": "String"
+        },
+			},
+			"required": ["answer"]
+		}
+	}
+}

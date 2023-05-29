@@ -13,14 +13,14 @@ app.use(router.middleware());
 app.listen(3001);
 
 describe("Get / - all catpost", () => {
-  xtest("Get all catpost", async () => {
+  test("Get all catpost", async () => {
     const result = await request(app.callback()).get("/api/v1/catpost/");
     expect(result.statusCode).toEqual(200);
   });
 });
 
 describe("Get /id - get post by id", () => {
-  xtest("Get catpost by id", async () => {
+  test("Get catpost by id", async () => {
     const result = await request(app.callback()).get("/api/v1/catpost/");
     expect(function(res){
       res.body.id=1;
@@ -30,40 +30,41 @@ describe("Get /id - get post by id", () => {
 });
 
 describe("Get /breed - get post by breed", () => {
-  xtest("Get catpost by breed", async () => {
+  test("Get catpost by breed", async () => {
     const result = await request(app.callback()).get("/api/v1/catpost");
     expect(result.statusCode).toEqual(200);
   });
 });
 
 describe("POST / - a simple api endpoint" , () => {
-  xtest('POST new catpost', async () =>{
+  test('POST new catpost', async () =>{
     const result = await request(app.callback()).post('/api/v1/catpost')
       .auth('staff001','abc123')
       .send({'title':'test cat',
               'breed':'Aegean',
              'alltext':'alltext',
-             'staffid':'2'
+             'staffid':'1'
             });
        expect(result.statusCode).toEqual(201);
-  });
+  },70000);
 });
 
 describe("PUT / - update catpost" , () => {
-  xtest('PUT and catpost', async () =>{
-    const result = await request(app.callback()).put('/api/v1/catpost')
+  test('PUT and catpost', async () =>{
+    const result = await request(app.callback()).put('/api/v1/catpost/12')
+      .auth('staff001','abc123')
       .send({'title':'cat change',
               'breed':'Aegean',
              'alltext':'test change'
             });
        expect(result.statusCode).toEqual(201);
-  });
+  },70000);
 });
 
 describe("DELETE / - update catpost" , () => {
   test('DELETE and catpost', async () =>{
-    const result = await request(app.callback()).del('/api/v1/catpost/9')
+    const result = await request(app.callback()).del('/api/v1/catpost/14')
       .auth('staff001','abc123')
        expect(result.statusCode).toEqual(201);
-  });
+  },70000);
 });

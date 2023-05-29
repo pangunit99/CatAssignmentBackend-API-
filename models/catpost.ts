@@ -41,7 +41,7 @@ export const add = async(post:any)=>{
 }
 
 export const update = async(id:any,catpost:any)=>{
-  const aid = Object.values(id);
+  const aid = [id];
   const keys = Object.keys(catpost);
   const values = Object.values(catpost);
   let parm = '';
@@ -60,8 +60,7 @@ export const update = async(id:any,catpost:any)=>{
 
 
 export const del = async(id:any)=>{
-  const aid = Object.values(id);
-
+  const aid = [id];
   const sql = `DELETE from catpost where id=?`
   try{
     await db.run_query(sql,aid);
